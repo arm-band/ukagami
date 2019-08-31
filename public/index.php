@@ -11,6 +11,13 @@ if (PHP_SAPI == 'cli-server') {
 
 require __DIR__ . '/../vendor/autoload.php';
 
+// find environment file
+$dot_env = __DIR__. '/../.env';
+if (is_readable($dot_env)) {
+    $dotenv = Dotenv\Dotenv::create(__DIR__. '/../');
+    $dotenv->load();
+}
+
 session_start();
 
 // Instantiate the app

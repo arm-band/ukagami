@@ -15,5 +15,14 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+        'debug' => getenv('DEBUG'),
+        // debug bar
+        'debugbar' => [
+            'storage' => [
+                'enabled' => true,
+                'path' => __DIR__. '/../logs/debug/',
+            ],
+        ],
+        'displayErrorDetails' => getenv('DISPLAY_ERROR'), // set to false in production
     ],
 ];
