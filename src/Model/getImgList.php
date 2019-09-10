@@ -45,10 +45,24 @@ class getImgList {
                             else { //17～24時まで
                                 $timeZone = 2;
                             }
+                            //文字列組み立て
+                            $titleStr = '';
+                            if(isset($imgMeta['IFD0']['Title']) && mb_strlen($imgMeta['IFD0']['Title'], 'UCS-2LE') > 0) { //EXIF情報は'UCS-2LE'で入っているっぽい
+                                //文字コード変換＋末尾の余計な文字を削除して人間が読める文字で整形
+                                $title = mb_convert_encoding($imgMeta['IFD0']['Title'], 'UTF-8', 'UCS-2LE');
+                                $titleStr = mb_substr($title, 0, mb_strlen($title, 'UTF-8') - 1);
+                            }
+                            $datetimeStr = str_replace(':', '/', $datetime[0]) . ' ' . $datetime[1];
                             //サーバ内の絶対パスではなく、URLの相対パスに変換
                             $filename = explode('/', $file);
                             $filepath = $this->settings['dataPath'][1] . $ym['year'] . '/' . $ym['month'] . '/' . $filename[count($filename) - 1];
-                            array_push($list[$date[2] - 1][$timeZone], $filepath); //判定された日・時の配列に追加
+                            array_push(
+                                $list[$date[2] - 1][$timeZone],
+                                [
+                                    'filepath' => $filepath,
+                                    'datetime' => $datetimeStr,
+                                    'title' => $titleStr
+                                ]); //判定された日・時の配列に追加
                         }
                     }
                 }

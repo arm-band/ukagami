@@ -46,7 +46,9 @@ for($i = 0; $i < $days; $i++) {
             $k = 0;
             $unlist = '<ul class="imgUl">';
             foreach($list[$i][$j] as $imgList) {
-                $unlist .= '<li class="imgUl_List"><a href="' . $imgList . '" data-lightbox="gp[day' . (string)($i + 1) . '_' . (string)$j . ']"><img src="' . $imgList . '"></a></li>';
+                $filename = explode('/', $imgList['filepath']);
+                $filepath = $settings['dataPath'][0] . $ym['year'] . '/' . $ym['month'] . '/' . $filename[count($filename) - 1];
+                $unlist .= '<li class="imgUl_List"><a href="' . $imgList['filepath'] . '" data-lightbox="gp[day' . (string)($i + 1) . '_' . (string)$j . ']" data-title="' . $imgList['title'] . ' (' . $imgList['datetime'] . ')"><img src="' . $imgList['filepath'] . '" alt="' . $imgList['title'] . ' (' . $imgList['datetime'] . ')"></a></li>';
                 $k++;
             }
 
