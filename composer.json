@@ -44,7 +44,7 @@
         "sort-packages": true
     },
     "scripts": {
-        "start": "php -S localhost:8080 -t public",
+        "start": "npm test && php -S localhost:8080 -t public",
         "test": "phpunit",
         "phpcs": "phpcs --standard=PSR2 src/",
         "phpmd": "phpmd src/ text cleancode,codesize,design,unusedcode"
