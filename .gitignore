@@ -3,8 +3,6 @@
 !/logs/README.md
 .env
 composer.lock
-/storage/*
-!/storage/.gitkeep
 /node_modules/
 /viewsrc/js/concat/
 /viewsrc/scss/assets/
@@ -13,4 +11,9 @@ composer.lock
 /viewsrc/scss/_plugins/_plugins.scss
 /viewsrc/img/lightbox/
 package-lock.json
-/public/
+/public/css/*
+/public/js/*
+/public/img/*.(png|gif|jpg|JPG|jpeg|JPEG|svg)
+/public/img/lightbox/*
+/public/img/storage/*
+!/public/img/storage/.gitkeep

@@ -12,7 +12,7 @@ class getDirList {
 
     //ディレクトリ一覧の配列を返す
     public function getDirArray() {
-        $dirs = scandir($this->settings['dataPath'], SCANDIR_SORT_DESCENDING);
+        $dirs = scandir($this->settings['dataPath'][0], SCANDIR_SORT_DESCENDING);
         $array = array();
 
         foreach($dirs as $dir) {
@@ -21,7 +21,7 @@ class getDirList {
             }
             else {
                 if(preg_match('/^[\d]{4}$/i', $dir)) { //yyyy形式のもののみリストに含む
-                    $subDirs = scandir($this->settings['dataPath'] . $dir . '/', SCANDIR_SORT_DESCENDING);
+                    $subDirs = scandir($this->settings['dataPath'][0] . $dir . '/', SCANDIR_SORT_DESCENDING);
                     foreach ($subDirs as $subDir) {
                         if(in_array($subDir, $this->settings['excludes'])) { //除外リストに含まれているものは処理しない
                             continue;

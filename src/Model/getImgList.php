@@ -12,14 +12,13 @@ class getImgList {
 
     //引数)$ym：キー'year','month'の2つを持つ連想配列
     public function getImg($ym, $getImgList) {
-        $photo_path = $this->settings['dataPath'] . $ym['year'] . '/' . $ym['month'] . '/*'; //パスを組み立てる //./img/yyyy/mm/*
+        $photo_path = $this->settings['dataPath'][0] . $ym['year'] . '/' . $ym['month'] . '/*'; //パスを組み立てる //./img/yyyy/mm/*
 
         $files = glob($photo_path); //「./photo/*」を探す
         $list = [];
         foreach($files as $file) { //$file = 実際にディレクトリに存在するファイルへのパス
-
             if(is_file($file)) {
-                if(preg_match('/^\.(jpg|jpeg|JPG|JPEG)$/i', $file)) {
+                if(preg_match('/\.(jpg|jpeg|JPG|JPEG)$/i', $file)) {
                     if(getimagesize($file) != false) { //画像情報取得できたならば
                         $imgMeta = exif_read_data($file, 'EXIF', true);
                         if(isset($imgMeta['EXIF']['DateTimeOriginal'])) { //EXIF情報のオリジナル画像の撮影日時を取得 //$imgMeta['EXIF']['DateTimeOriginal'] = 'yyyy:MM:dd hh:ii:ss'
@@ -37,16 +36,19 @@ class getImgList {
                             $hour = (int)$time[0];
                             $timeZone = 2;
 
-                            if($hour >= 0 && $hour < 11) { //0時～11時まで
+                            if($hour >= $this->settings['mealTimeZone'][0] && $hour < $this->settings['mealTimeZone'][1]) { //0時～11時まで
                                 $timeZone = 0;
                             }
-                            else if($hour >= 11 && $hour < 17) { //11時～17時まで
+                            else if($hour >= $this->settings['mealTimeZone'][1] && $hour < $this->settings['mealTimeZone'][2]) { //11時～17時まで
                                 $timeZone = 1;
                             }
                             else { //17～24時まで
                                 $timeZone = 2;
                             }
-                            array_push($list[$date[2] - 1][$timeZone], $file); //判定された日・時の配列に追加
+                            //サーバ内の絶対パスではなく、URLの相対パスに変換
+                            $filename = explode('/', $file);
+                            $filepath = $this->settings['dataPath'][1] . $ym['year'] . '/' . $ym['month'] . '/' . $filename[count($filename) - 1];
+                            array_push($list[$date[2] - 1][$timeZone], $filepath); //判定された日・時の配列に追加
                         }
                     }
                 }

@@ -56,7 +56,6 @@ body:not(.mobileSafari) .eyecatch {
     background-color: $bg-color;
     color: $color;
     div:not(.text-center) p:not(.text-center) {
-        text-indent: 1rem;
         & .fa-fw {
             margin: {
                 left: -1rem;

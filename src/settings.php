@@ -20,12 +20,20 @@ return [
             'cpYear' => '2019'
         ],
         //img data
-        'dataPath' => __DIR__ . '/../storage/',
+        'dataPath' => [
+            __DIR__ . '/../public/img/storage/',
+            '../img/storage/',
+        ],
         //一覧除外リスト
         'excludes' => [
             '.',
             '..'
         ],
+        'mealTimeZone' => [
+            0,
+            11,
+            17
+        ], //食事の時間帯の区切り方。要素数は3つ [0, 11, 17] ならば 朝:0～11, 昼:11～17, 夜:17~24
 
         // Monolog settings
         'logger' => [
