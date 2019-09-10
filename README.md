@@ -29,6 +29,8 @@ Slim v3を使った食事一覧を出力する簡易Webアプリ
 
 `composer start`
 
+modified Scss or JS: `npm test`
+
 ## Directories
 
 ~~~
