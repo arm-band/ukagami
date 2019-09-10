@@ -22,9 +22,28 @@ return function (App $app) {
     }
 
     // view renderer
-    $container['renderer'] = function ($c) {
+    $container['renderer'] = function($c) {
         $settings = $c->get('settings')['renderer'];
         return new \Slim\Views\PhpRenderer($settings['template_path']);
+    };
+
+    //Model
+    $container['getDirList'] = function($c) {
+        $getDirList = new \Slim\App\Model\getDirList($c->get('settings'));
+        return $getDirList;
+    };
+    $container['getImgList'] = function($c) {
+        $getImgList = new \Slim\App\Model\getImgList($c->get('settings'));
+        return $getImgList;
+    };
+    //Helper
+    $container['escape'] = function() {
+        $escape = new \Slim\App\Helper\escape();
+        return $escape;
+    };
+    $container['procDate'] = function() {
+        $procDate = new \Slim\App\Helper\procDate();
+        return $procDate;
     };
 
     // monolog

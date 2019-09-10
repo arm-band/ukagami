@@ -1,45 +1,53 @@
+<?php
+$rootDir = '';
+if($pageID === 'index') {
+    $rootDir = './';
+} else if($pageID === 'archive') {
+    $rootDir = '../';
+} ?>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Slim 3</title>
-        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-        <style>
-            body {
-                margin: 50px 0 0 0;
-                padding: 0;
-                width: 100%;
-                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-                text-align: center;
-                color: #aaa;
-                font-size: 18px;
-            }
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no,address=no,email=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><?= $settings['appInfo']['name']; ?></title>
 
-            h1 {
-                color: #719e40;
-                letter-spacing: -3px;
-                font-family: 'Lato', sans-serif;
-                font-size: 100px;
-                font-weight: 200;
-                margin-bottom: 0;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
-        <h2>Get Started</h2>
-        <div><code>git clone &lt;REPOSITORY_NAME&gt; -b 3.1.8</code></div>
-        <h2>References</h2>
-        <ul>
-            <li><a href="https://qiita.com/yookihiroo/items/8222f4c44c7b0e4fe686">Slim(PHP Framework)事始め(2) - Qiita</a></li>
-            <li><a href="https://qiita.com/sngazm/items/d27639f54e0abe723da9">PHP dotenvの読み込み方が変わってた - Qiita</a></li>
-        </ul>
+    <meta name="theme-color" content="#F24A00">
 
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
-        <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
-        <?php endif; ?>
-    </body>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?= $rootDir ?>css/index.css">
+</head>
+<body data-spy="scroll" data-offset="80" class="<?= $pageID; ?>" id="<?= $pageID; ?>">
+<div id="wrapper">
+<div class="upper">
+
+<header class="header" id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand my-0 ml-auto mr-auto navbar_head" href="<?= $rootDir ?>"><h1><?= $settings['appInfo']['name']; ?></h1></a>
+        </div>
+    </nav>
+</header>
+
+<main class="main <?= $pageID; ?>main <?= $pageID; ?>Grid">
+    <section class="container">
+<?php if($pageID === 'index') {
+    require_once(__DIR__ . '/_dirList.phtml');
+} else if($pageID === 'archive') {
+    require_once(__DIR__ . '/_imgList.phtml');
+} ?>
+    </section>
+</main>
+
+</div>
+
+<footer class="footer mt-5 text-center">
+    <small class="pt-1 pb-2 copyRight">Copyright <?= $settings['appInfo']['cpYear']; ?> <?= $settings['appInfo']['author']; ?></small>
+</footer>
+
+</div>
+<script src="<?= $rootDir ?>js/lib.min.js" defer></script>
+<script src="<?= $rootDir ?>js/app.min.js" defer></script>
+</body>
 </html>

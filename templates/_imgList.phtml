@@ -1,0 +1,79 @@
+<?php
+$holidays = Yasumi\Yasumi::create('Japan', (integer)$ym['year'], 'ja_JP');
+var_dump($list);
+
+echo '<h2 class="mt-5 mb-4 text-center">Meals</h2>';
+
+//引数)$ym：年月、$day：日
+function weekDay($ym, $day, $holidays) {
+    $weekFlg = (int)date('w', mktime(0, 0, 0, $ym['month'], $day, $ym['year']));
+    $weekCls = date('l', mktime(0, 0, 0, $ym['month'], $day, $ym['year']));
+    $holidayStr = '';
+    $weekStr = '';
+    if($weekFlg === 0) {
+        $weekStr = '日';
+    }
+    else if($weekFlg === 1) {
+        $weekStr = '月';
+    }
+    else if($weekFlg === 2) {
+        $weekStr = '火';
+    }
+    else if($weekFlg === 3) {
+        $weekStr = '水';
+    }
+    else if($weekFlg === 4) {
+        $weekStr = '木';
+    }
+    else if($weekFlg === 5) {
+        $weekStr = '金';
+    }
+    else {
+        $weekStr = '土';
+    }
+    if($holidays->isHoliday(new DateTime($ym['year'] . '-' . $ym['month'] . '-' . $day))) {
+        $holidayStr = ' Holiday';
+    }
+
+    return '<span class="' . $weekCls . $holidayStr . '">' . $day . '(' . $weekStr . ')</span>';
+}
+
+for($i = 0; $i < $days; $i++) {
+    $dayStr = weekDay($ym, $i + 1, $holidays);
+
+    $grid = '';
+    if(array_key_exists($i, $list)) {
+        for($j = 0; $j < 3; $j++) {
+            $k = 0;
+            $unlist = '<ul class="imgUl">';
+            foreach($list[$i][$j] as $imgList) {
+                $unlist .= '<li class="imgUl_List"><a href="' . $imgList . '" data-lightbox="gp[day' . (string)($i + 1) . '_' . (string)$j . ']"><img src="' . $imgList . '"></a></li>';
+                $k++;
+            }
+
+            if($k == 0) { //画像がないときはメッセージ
+                $unlist .= '<li class="imgUl_empty"><span>No Images.</li>';
+            }
+
+            $unlist .= '</ul>';
+
+            if($k >= 2) { //画像が2枚以上ある場合は枚数表示のカードを追加
+                $unlist .= '<p class="cntImg">' . (string)$k . '</p>';
+            }
+
+            $grid .= '<div class="col-4 mealGrid">' . $unlist . '</div>'; //グリッド生成
+        }
+    }
+$dayTile = <<< EOM
+<div class="row">
+    <div class="col-12 dayClmn">
+        <h3 class="dayClmn_Header">{$dayStr}</h3>
+    </div>
+</div>
+<div class="row archiveGrid_eqHeight">
+{$grid}
+</div>
+EOM;
+
+    echo $dayTile; //出力
+}

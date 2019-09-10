@@ -1,0 +1,12 @@
+<?php
+$listHTML = '';
+foreach($lists as $list) {
+    $listHTML .= '<li class="list-group-item"><a href="./archive/' . $list . '">' . $list . '</a></li>' . "\n";
+}
+
+echo <<< EOM
+<h2 class="mt-5 mb-4 text-center">Archives</h2>
+<ul class="list-group">
+{$listHTML}
+</ul>
+EOM;
