@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+// ============================================== *
+//                                                *
+//  共通                                          *
+//                                                *
+// ============================================= */
+@import "common";
+
+// ============================================== *
+//                                                *
+//  メイン                                         *
+//                                                *
+// ============================================= */
+.index {
+    margin-top: 12px;
+    .list-group-item {
+        padding: 0; //bootErase
+        a {
+            display: block;
+            padding: 10px 15px;
+        }
+    }
+}
+.archive {
+    &Grid {
+        &_eqHeight { //グリッドの高さをそろえる
+            display: flex;
+        }
+        .dayClmn {
+            border: 2px solid $link-v-color;
+            &_Header {
+                text-align: center;
+                vertical-align: middle;
+
+                .Saturday {
+                    color: dodgerblue;
+                }
+                .Sunday, .Holiday {
+                    color: indianred;
+                }
+            }
+        }
+        .mealGrid {
+            border: 1px solid $link-color;
+            overflow: hidden;
+            padding: {
+                left: 0;
+                right: 0;
+            } //bootErase
+            .imgUl {
+                list-style: outside none;
+                margin-bottom: 0; //bootErase
+                padding-left: 0; //bootErase
+                z-index: 2;
+                height: 100%;
+                &_List {
+                    position: relative;
+                    height: 100%;
+                    &:not(:first-child) {
+                        display: none;
+                    }
+                    a {
+                        @include t();
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        text-align: center;
+                        &:hover {
+                            background-color: $color;
+                            img {
+                                transform: scale(1.2);
+                                opacity: 0.6;
+                            }
+                        }
+                    }
+                    img {
+                        width: auto;
+                        height: auto;
+                        max: {
+                            width: 100%;
+                            height: 100%;
+                        }
+                        @include t();
+                    }
+                }
+                &_empty {
+                    height: 100%;
+                    span {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                        transform: rotate(330deg);
+                        z-index: -1;
+                    }
+                }
+            }
+            .cntImg {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 0.2em 0.6em;
+                background-color: rgba($main-color, 0.5);
+                color: $bg-color;
+                z-index: 10;
+            }
+        }
+    }
+}

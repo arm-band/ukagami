@@ -5,3 +5,12 @@
 composer.lock
 /storage/*
 !/storage/.gitkeep
+/node_modules/
+/viewsrc/js/concat/
+/viewsrc/scss/assets/
+/viewsrc/scss/util/_var.scss
+/viewsrc/js/_plugins/_plugins.js
+/viewsrc/scss/_plugins/_plugins.scss
+/viewsrc/img/lightbox/
+package-lock.json
+/public/

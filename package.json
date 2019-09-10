@@ -1,0 +1,67 @@
+{
+    "name": "kiribi_ususama",
+    "version": "5.1.9-4.3.1",
+    "description": "gulpを使用した小・中規模Webサイト制作用のボイラープレートです。",
+    "main": "gulpfile.js",
+    "scripts": {
+        "om": "mkdirp viewsrc/contents viewsrc/scss/assets",
+        "krodhana": "npm-run-all -s kongou riken",
+        "hum_jah": "gulp",
+        "kongou": "npm-run-all -p kashou zanmai gue shingon",
+        "kashou": "cpx \"./node_modules/bootstrap-honoka/scss/*.scss\" \"./viewsrc/scss/assets/bootstrap\"",
+        "zanmai": "cpx \"./node_modules/bootstrap-honoka/scss/honoka/_honoka.scss\" \"./viewsrc/scss/assets/bootstrap/honoka\"",
+        "gue": "cpx \"./node_modules/bootstrap-honoka/scss/honoka/*.scss\" \"./viewsrc/scss/assets/bootstrap/honoka/honoka\"",
+        "shingon": "cpx \"./node_modules/bootstrap/scss/**/*.scss\" \"./viewsrc/scss/assets/bootstrap/honoka/bootstrap/scss\"",
+        "riken": "node ./bin/riken",
+        "fujoketsu": "rimraf ./viewsrc/scss/assets/ ./viewsrc/js/concat/ ./viewsrc/scss/util/_var.scss ./viewsrc/img/lightbox/ ./public/ ./bin/config/subterranean/ ./package-lock.json",
+        "lightbox:css": "mkdirp viewsrc/scss/assets/lightbox",
+        "lightbox:img": "cpx \"./node_modules/lightbox2/dist/images/*\" \"./viewsrc/img/lightbox\"",
+        "gulp": "gulp",
+        "opener": "opener",
+        "start": "npm-run-all -s om krodhana hum_jah",
+        "test": "npm-run-all -s plugin gulp",
+        "deploy": "gulp ftp",
+        "init": "npm run kongou",
+        "plugin": "npm run riken",
+        "delete": "npm run fujoketsu"
+    },
+    "author": "Arm Band",
+    "license": "ISC",
+    "browserslist": [
+        "last 2 version",
+        "iOS >= 10.0",
+        "Android >= 5.0"
+    ],
+    "dependencies": {
+        "brand-colors": "^2.0.1",
+        "bootstrap": "^4.3.1",
+        "bootstrap-honoka": "^4.3.1",
+        "bowser": "^2.4.0",
+        "jquery": "^3.4.1",
+        "jquery.easing": "^1.4.1",
+        "lightbox2": "^2.11.0"
+    },
+    "devDependencies": {
+        "cpx": "^1.5.0",
+        "gulp": "^4.0.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-imagemin": "^6.0.0",
+        "gulp-notify": "^3.2.0",
+        "gulp-plumber": "^1.2.1",
+        "gulp-rename": "^1.4.0",
+        "gulp-sass": "^4.0.2",
+        "gulp-autoprefixer": "^6.1.0",
+        "gulp-replace": "^1.0.0",
+        "gulp-uglify-es": "^1.0.4",
+        "gulp-watch": "^5.0.1",
+        "mkdirp": "^0.5.1",
+        "npm-run-all": "^4.1.5",
+        "require-dir": "^1.2.0",
+        "rimraf": "^2.6.3",
+        "yaml": "^1.6.0"
+    },
+    "engines": {
+        "node": ">= 9.0.0",
+        "npm": ">= 4.0.0"
+    }
+}
